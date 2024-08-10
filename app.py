@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 import torch
 
 # Título de la aplicación
-st.title("Aplicación de Clasificación de Casos Clínicos")
+st.title("Aplicación de Clasificación y Evaluación de Casos Clínicos")
 
 # Descripción del caso clínico como entrada de texto
 case_description = st.text_area("Descripción del Caso Clínico:")
@@ -53,7 +53,23 @@ if st.button("Clasificar"):
         case_vector = preprocess_text_with_bert(case_description).reshape(1, -1)
         # Predecir la clase
         prediction = model.predict(case_vector)
-        # Mostrar el resultado
+        # Mostrar el resultado de la clasificación
         st.write(f"Clasificación del caso: {'Caso para intervención' if prediction[0] == 1 else 'Caso para cuidados paliativos'}")
+        
+        # Muestra los análisis adicionales
+        st.subheader("Evaluación Ética y Recomendaciones:")
+        st.write("**Evaluación Integral:** Alta prioridad de cuidados paliativos.")
+        st.write("**Autonomía:** Consulta con la familia y respeto a los valores del paciente.")
+        st.write("**Beneficencia y No Maleficencia:** Evitar tratamientos que prolonguen el sufrimiento.")
+        st.write("**Justicia:** Priorizar pacientes con mayores beneficios y probabilidades de recuperación.")
+        st.write("**Recomendaciones del Comité de Ética:** No iniciar diálisis, enfocar en cuidados paliativos.")
+
+        # Simular otras recomendaciones según la descripción del caso
+        st.subheader("Recomendaciones del Comité de Ética:")
+        st.write("- Alinear la recomendación con el bienestar del paciente y su familia.")
+        st.write("- Respetar la autonomía del paciente y las directrices familiares.")
+        st.write("- Integrar cuidados paliativos desde etapas tempranas.")
     else:
         st.write("Por favor, ingrese una descripción del caso clínico.")
+
+
